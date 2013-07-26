@@ -3,7 +3,11 @@ HullCenter = 9; 	//sphere size of center
 armLength = 40;		//length of all arms
 HullEndPercent = .4;	//diameter of hull on arm end as percentage of HullCenter
 points = 11;	//size of point balls
+
+
 $fn = 60;
+ArmEndRad = HullCenter*HullEndPercent;
+pointArmLengthSagitta = sqrt(points*points-ArmEndRad*ArmEndRad);
 
 Jack();
 
@@ -18,9 +22,9 @@ module Jack(){
 		rotate(i){
 		hull(){
 			sphere(HullCenter);
-			cylinder(armLength,r=HullCenter*HullEndPercent);
+			cylinder(armLength,r=ArmEndRad);
 		}
-		translate([0,0,armLength+points*.85])
+		translate([0,0,armLength+pointArmLengthSagitta])
 		sphere(points);
 		}
 	}
